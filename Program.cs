@@ -7,28 +7,28 @@ namespace ConsoleApp3
         int ch;
         int zn;
 
-        public Drobi (int a)
+        public Drobi(int a)
         {
-            this.ch = a;
-            this.zn = 1;
+            ch = a;
+            zn = 1;
         }
         public Drobi(int a, int b)
         {
-            this.ch = a;
-            this.zn = b;
+            ch = a;
+            zn = b;
         }
         public Drobi(int a, int b, int z)
         {
-            this.zn = b;
-            this.ch = z * b + a;
+            zn = b;
+            ch = z * b + a;
         }
-        public double Desyat()
+        double Desyat()
         {
-            return (double) (ch) / zn;
+            return (double)(ch) / zn;
         }
         public static Drobi operator + (Drobi x, Drobi y)
         {
-            return new Drobi(x.ch*y.zn + y.ch*x.zn, x.zn*y.zn);
+            return new Drobi(x.ch * y.zn + y.ch * x.zn, x.zn * y.zn);
         }
         public static Drobi operator - (Drobi x, Drobi y)
         {
@@ -42,12 +42,26 @@ namespace ConsoleApp3
         {
             return new Drobi(x.ch * y.zn, x.zn * y.ch);
         }
+        public static void GetZnak(Drobi a)
+        {
+            if(a.zn >= 0 & a.ch >= 0)
+            {
+                Console.WriteLine('+');
+            }
+            else
+            {
+                Console.WriteLine('-');
+            }
+        }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            
+            Drobi drob1 = new Drobi(7);
+            Drobi drob2 = new Drobi(-3, 2);
+            Drobi.GetZnak(drob1);
+            Drobi.GetZnak(drob2);
         }
     }
 }
