@@ -53,15 +53,25 @@ namespace ConsoleApp3
                 Console.WriteLine('-');
             }
         }
+        public delegate void Changed(Drobi a, int b);
+
+        public event Changed EventChanger;
+        public int Ch
+        {
+            get { return ch; }
+            set { ch = value; }
+        }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            Drobi drob1 = new Drobi(7);
+            Drobi drob1 = new Drobi(2, 1);
             Drobi drob2 = new Drobi(-3, 2);
             Drobi.GetZnak(drob1);
             Drobi.GetZnak(drob2);
+            drob1.Ch = 3;
+
         }
     }
 }
