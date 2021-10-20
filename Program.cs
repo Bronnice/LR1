@@ -61,17 +61,28 @@ namespace ConsoleApp3
             get { return ch; }
             set { ch = value; }
         }
+        public static void GetDrobe(Drobi a)
+        {
+            Console.WriteLine(a.ch+"/"+a.zn);
+        }
+        public int this[int index]
+        {
+            get { return (index == 0) ? ch : zn; }
+        }
+    }
+    class Method
+    {
+       public static void MyMethod(Drobi a, int x)
+        {
+            x = ;
+        }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            Drobi drob1 = new Drobi(2, 1);
-            Drobi drob2 = new Drobi(-3, 2);
-            Drobi.GetZnak(drob1);
-            Drobi.GetZnak(drob2);
-            drob1.Ch = 3;
-
+            Drobi drobe1 = new Drobi(-3, 5);
+            Console.WriteLine(drobe1[0]);
         }
     }
 }
