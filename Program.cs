@@ -59,7 +59,11 @@ namespace ConsoleApp3
         public int Ch
         {
             get { return ch; }
-            set { ch = value; }
+            set 
+            {
+                EventChanger(this, value);
+                ch = value; 
+            }
         }
         public static void GetDrobe(Drobi a)
         {
@@ -74,15 +78,16 @@ namespace ConsoleApp3
     {
        public static void MyMethod(Drobi a, int x)
         {
-            x = ;
+            Console.WriteLine("Дробь изменена");
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            Drobi drobe1 = new Drobi(-3, 5);
-            Console.WriteLine(drobe1[0]);
+            Drobi drob1 = new Drobi(3, 1);
+            drob1.EventChanger += Method.MyMethod;
+            drob1.Ch = 7;
         }
     }
 }
