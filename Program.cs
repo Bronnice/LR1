@@ -22,7 +22,7 @@ namespace ConsoleApp3
             zn = b;
             ch = z * b + a;
         }
-        double Desyat()
+        public double Desyat()
         {
             return (double)(ch) / zn;
         }
@@ -42,32 +42,31 @@ namespace ConsoleApp3
         {
             return new Drobi(x.ch * y.zn, x.zn * y.ch);
         }
-        public static void GetZnak(Drobi a)
+        public bool GetZnak()
         {
-            if(a.zn >= 0 & a.ch >= 0)
-            {
-                Console.WriteLine('+');
-            }
-            else
-            {
-                Console.WriteLine('-');
-            }
+            return Desyat() >= 0;
         }
         public delegate void Changed(Drobi a, int b);
 
-        public event Changed EventChanger;
+        public event Changed EventChangerCh;
+        public event Changed EventChangerZn;
         public int Ch
         {
             get { return ch; }
             set 
             {
-                EventChanger(this, value);
+                EventChangerCh(this, value);
                 ch = value; 
             }
         }
-        public static void GetDrobe(Drobi a)
+        public int Zn
         {
-            Console.WriteLine(a.ch+"/"+a.zn);
+            get { return zn; }
+            set
+            {
+                EventChangerZn(this, value);
+                zn = value;
+            }
         }
         public int this[int index]
         {
@@ -76,18 +75,32 @@ namespace ConsoleApp3
     }
     class Method
     {
-       public static void MyMethod(Drobi a, int x)
+       public static void MyMethodCh(Drobi a, int x)
         {
-            Console.WriteLine("Дробь изменена");
+            Console.WriteLine("Числитель изменён");
+        }
+        public static void MyMethodZn(Drobi a, int x)
+        {
+            Console.WriteLine("Знаменатель изменён");
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            Drobi drob1 = new Drobi(3, 1);
-            drob1.EventChanger += Method.MyMethod;
-            drob1.Ch = 7;
+            Drobi dr1 = new Drobi(3);
+            Drobi dr2 = new Drobi(-1, 2);
+            Drobi dr3 = new Drobi(4, 5, 2);
+            Console.WriteLine(dr1.Desyat());
+            Console.WriteLine((dr1 + dr2).Ch+"/"+(dr1+dr2).Zn);
+            Console.WriteLine(dr1.GetZnak());
+            Console.WriteLine(dr2.GetZnak());
+            dr1.EventChangerCh += Method.MyMethodCh;
+            dr1.EventChangerZn += Method.MyMethodZn;
+            dr1.Ch = 15;
+            dr1.Zn = 3;
+            Console.WriteLine(dr1[0]);
+            Console.WriteLine(dr1[1]);
         }
     }
 }
